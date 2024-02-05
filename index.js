@@ -77,7 +77,7 @@ const { title } = require('process');
                 });
                 }
                 else if(q.pathname == "/books" && req.method === "DELETE"){
-                	let sql = `DELETE FROM library.book where id = ${id}`;
+                	let sql = `DELETE FROM library.book WHERE id = ${id}`;
             		db.query(sql,(err, result) => {
             	        if (err) throw err;
             		    
@@ -88,9 +88,25 @@ const { title } = require('process');
             		    }
             		    
             	    });    	
-                }else{
+                }
+                else if(q.pathname == "/books/title" && req.method === "DELETE"){
+                    let title = req.query.title;
+                	let sql = "DELETE FROM library.book WHERE title = "+ title;
+            		db.query(sql,(err, result) => {
+            	        if (err) throw err;
+            		    
+            		    if(result.affectedRows == 1){
+            		    	res.end(JSON.stringify({message: 'success'}));	
+            		    }else{
+            				res.end(JSON.stringify({message: 'gagal'}));	
+            		    }
+
+            	    });    	
+                }
+                else{
                 	res.end();
                 }
+                
               
             }).listen(port);
             console.log('server is running on http://localhost:'+ port);
