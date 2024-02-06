@@ -90,8 +90,7 @@ const { title } = require('process');
             	    });    	
                 }
                 else if(q.pathname == "/books/title" && req.method === "DELETE"){
-                    const title = q.pathname.split('/').pop();
-                	let sql = "DELETE FROM library.book WHERE title = `"+ title + "`";
+                	let sql = "DELETE FROM library.book WHERE title = 'The Hobbit'";
             		db.query(sql,(err, result) => {
             	        if (err) throw err;
             		    
